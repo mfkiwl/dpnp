@@ -182,31 +182,21 @@ def matmul(in_array1, in_array2, out=None):
 
     is_dparray1 = isinstance(in_array1, dparray)
     is_dparray2 = isinstance(in_array2, dparray)
+    out_is_dparray = isinstance(out, dparray)
 
-    if (not use_origin_backend(in_array1) and is_dparray1 and is_dparray2):
+    if not use_origin_backend(in_array1) and is_dparray1 and is_dparray2:
 
-        if out is not None:
-            checker_throw_value_error("matmul", "out", type(out), None)
+        if out is not None and not out_is_dparray:
+            pass
+        else:
+            # Cost model checks
+            cost_size = 4096  # 2D array shape(64, 64)
+            if in_array1.dtype == numpy.float64 or in_array1.dtype == numpy.float32:
+                # Floating point types are handled via original math library better than SYCL math library
+                cost_size = 262144  # 2D array shape(512, 512)
 
-        """
-        Cost model checks
-        """
-        cost_size = 4096  # 2D array shape(64, 64)
-        if ((in_array1.dtype == numpy.float64) or (in_array1.dtype == numpy.float32)):
-            """
-            Floating point types are handled via original math library better than SYCL math library
-            """
-            cost_size = 262144  # 2D array shape(512, 512)
+            if in_array1.size > cost_size and in_array2.size > cost_size:
+                # print(f"in_array1.size={in_array1.size}")
+                return dpnp_matmul(in_array1, in_array2, out=out)
 
-        dparray1_size = in_array1.size
-        dparray2_size = in_array2.size
-
-        if (dparray1_size > cost_size) and (dparray2_size > cost_size):
-            # print(f"dparray1_size={dparray1_size}")
-            return dpnp_matmul(in_array1, in_array2)
-
-    input1 = asnumpy(in_array1) if is_dparray1 else in_array1
-    input2 = asnumpy(in_array2) if is_dparray2 else in_array2
-
-    # TODO need to return dparray instead ndarray
-    return numpy.matmul(input1, input2, out=out)
+    return call_origin(numpy.matmul, in_array1, in_array2, out=out)

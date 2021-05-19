@@ -174,7 +174,7 @@ cpdef dparray dpnp_init_val(shape, dtype, value):
     return result
 
 
-cpdef dparray dpnp_matmul(dparray in_array1, dparray in_array2):
+cpdef dparray dpnp_matmul(dparray in_array1, dparray in_array2, dparray out=None):
     cdef vector[Py_ssize_t] shape_result
 
     cdef vector[Py_ssize_t] shape1 = in_array1.shape
@@ -235,14 +235,23 @@ cpdef dparray dpnp_matmul(dparray in_array1, dparray in_array2):
     cdef DPNPFuncData kernel_data = get_dpnp_function_ptr(DPNP_FN_MATMUL, param1_type, param2_type)
 
     result_type = dpnp_DPNPFuncType_to_dtype(< size_t > kernel_data.return_type)
-    # ceate result array with type given by FPTR data
-    cdef dparray result = dparray(shape_result, dtype=result_type)
+
+    cdef dparray result
+    if out is not None and out.dtype == result_type:
+        result = out
+    else:
+        # ceate result array with type given by FPTR data
+        result = dparray(shape_result, dtype=result_type)
+
     if result.size == 0:
         return result
 
     cdef fptr_blas_gemm_2in_1out_t func = <fptr_blas_gemm_2in_1out_t > kernel_data.ptr
     # call FPTR function
     func(in_array1.get_data(), in_array2.get_data(), result.get_data(), size_m, size_n, size_k)
+
+    if out is not None and out.dtype != result_type:
+        dpnp_copyto(out, result)
 
     return result
 

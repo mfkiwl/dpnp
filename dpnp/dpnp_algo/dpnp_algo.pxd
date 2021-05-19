@@ -273,7 +273,7 @@ cpdef dparray dpnp_not_equal(dparray input1, input2)
 Linear algebra
 """
 cpdef dparray dpnp_dot(dparray in_array1, dparray in_array2)
-cpdef dparray dpnp_matmul(dparray in_array1, dparray in_array2)
+cpdef dparray dpnp_matmul(dparray in_array1, dparray in_array2, dparray out=*)
 
 
 """
@@ -305,6 +305,7 @@ cpdef dparray dpnp_subtract(object x1_obj, object x2_obj, object dtype=*, dparra
 """
 Array manipulation routines
 """
+cpdef dpnp_copyto(dparray dst, dparray src, object where=*)
 cpdef dparray dpnp_repeat(dparray array1, repeats, axes=*)
 cpdef dparray dpnp_transpose(dparray array1, axes=*)
 
