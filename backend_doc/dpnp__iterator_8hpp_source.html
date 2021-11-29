@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">DPNP C++ backend kernel library
-   &#160;<span id="projectnumber">0.6.2</span>
+   &#160;<span id="projectnumber">0.9.0</span>
    </div>
    <div id="projectbrief">NumPy-like API accelerated with SYCL</div>
   </td>
@@ -489,8 +489,8 @@ $(document).ready(function(){initNavTree('dpnp__iterator_8hpp_source.html',''); 
 <div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;            {</div>
 <div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;                <span class="keywordflow">if</span> (std::find(axes.begin(), axes.end(), iit) == axes.end())</div>
 <div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;                {</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                    <span class="keyword">const</span> size_type output_xyz_id = <a class="code" href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gad37eb9ce0ad29590cc931a9b6cd538e2">get_xyz_id_by_id_inkernel</a>(output_global_id, output_shape_strides,</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;                                                                              output_shape_size, oit);</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;                    <span class="keyword">const</span> size_type output_xyz_id =</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;                        <a class="code" href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gad37eb9ce0ad29590cc931a9b6cd538e2">get_xyz_id_by_id_inkernel</a>(output_global_id, output_shape_strides, output_shape_size, oit);</div>
 <div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;                    input_global_id += (output_xyz_id * input_shape_strides[iit]);</div>
 <div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;                    ++oit;</div>
 <div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;                }</div>
@@ -506,8 +506,8 @@ $(document).ready(function(){initNavTree('dpnp__iterator_8hpp_source.html',''); 
 <div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;                size_type* broadcast_axes_end = broadcast_axes + broadcast_axes_size;</div>
 <div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;                <span class="keywordflow">if</span> (std::find(broadcast_axes, broadcast_axes_end, orit) == broadcast_axes_end)</div>
 <div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;                {</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;                    <span class="keyword">const</span> size_type output_xyz_id = <a class="code" href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gad37eb9ce0ad29590cc931a9b6cd538e2">get_xyz_id_by_id_inkernel</a>(output_global_id, output_shape_strides,</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;                                                                              output_shape_size, orit);</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;                    <span class="keyword">const</span> size_type output_xyz_id =</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;                        <a class="code" href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gad37eb9ce0ad29590cc931a9b6cd538e2">get_xyz_id_by_id_inkernel</a>(output_global_id, output_shape_strides, output_shape_size, orit);</div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;                    input_global_id += (output_xyz_id * input_shape_strides[irit]);</div>
 <div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;                }</div>
 <div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;            }</div>
@@ -608,7 +608,7 @@ $(document).ready(function(){initNavTree('dpnp__iterator_8hpp_source.html',''); 
 <div class="ttc" id="agroup___b_a_c_k_e_n_d___u_t_i_l_s_html_ga5f47f787627aa8dbd02301760482d7d6"><div class="ttname"><a href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#ga5f47f787627aa8dbd02301760482d7d6">DPNPC_id::broadcast_to_shape</a></div><div class="ttdeci">void broadcast_to_shape(const std::vector&lt; size_type &gt; &amp;__shape)</div><div class="ttdoc">Broadcast input data to specified shape.</div><div class="ttdef"><b>Definition:</b> <a href="dpnp__iterator_8hpp_source.html#l00251">dpnp_iterator.hpp:251</a></div></div>
 <div class="ttc" id="agroup___b_a_c_k_e_n_d___u_t_i_l_s_html_ga743bcd47e85667e5f238b99478c54d0f"><div class="ttname"><a href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#ga743bcd47e85667e5f238b99478c54d0f">DPNPC_id::set_axis</a></div><div class="ttdeci">void set_axis(long __axis)</div><div class="ttdoc">Set axis for the data object to use in computation.</div><div class="ttdef"><b>Definition:</b> <a href="dpnp__iterator_8hpp_source.html#l00313">dpnp_iterator.hpp:313</a></div></div>
 <div class="ttc" id="agroup___b_a_c_k_e_n_d___u_t_i_l_s_html_ga86f1f123df6b60b57542124fed792572"><div class="ttname"><a href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#ga86f1f123df6b60b57542124fed792572">DPNPC_id::set_axes</a></div><div class="ttdeci">void set_axes(const std::vector&lt; long &gt; &amp;__axes)</div><div class="ttdoc">Set axes for the data object to use in computation.</div><div class="ttdef"><b>Definition:</b> <a href="dpnp__iterator_8hpp_source.html#l00341">dpnp_iterator.hpp:341</a></div></div>
-<div class="ttc" id="agroup___b_a_c_k_e_n_d___u_t_i_l_s_html_gad37eb9ce0ad29590cc931a9b6cd538e2"><div class="ttname"><a href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gad37eb9ce0ad29590cc931a9b6cd538e2">get_xyz_id_by_id_inkernel</a></div><div class="ttdeci">_DataType get_xyz_id_by_id_inkernel(size_t global_id, const _DataType *offsets, size_t offsets_size, size_t axis)</div><div class="ttdoc">Calculate xyz id for given axis from linear index.</div><div class="ttdef"><b>Definition:</b> <a href="dpnp__utils_8hpp_source.html#l00088">dpnp_utils.hpp:88</a></div></div>
+<div class="ttc" id="agroup___b_a_c_k_e_n_d___u_t_i_l_s_html_gad37eb9ce0ad29590cc931a9b6cd538e2"><div class="ttname"><a href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gad37eb9ce0ad29590cc931a9b6cd538e2">get_xyz_id_by_id_inkernel</a></div><div class="ttdeci">_DataType get_xyz_id_by_id_inkernel(size_t global_id, const _DataType *offsets, size_t offsets_size, size_t axis)</div><div class="ttdoc">Calculate xyz id for given axis from linear index.</div><div class="ttdef"><b>Definition:</b> <a href="dpnp__utils_8hpp_source.html#l00121">dpnp_utils.hpp:121</a></div></div>
 <div class="ttc" id="agroup___b_a_c_k_e_n_d___u_t_i_l_s_html_gae3c3b0a869dc364c99e7e33e739dfa07"><div class="ttname"><a href="group___b_a_c_k_e_n_d___u_t_i_l_s.html#gae3c3b0a869dc364c99e7e33e739dfa07">DPNPC_id::DPNPC_id</a></div><div class="ttdeci">DPNPC_id(pointer __ptr, const std::vector&lt; size_type &gt; &amp;__shape)</div><div class="ttdoc">Main container for reduction iterator.</div><div class="ttdef"><b>Definition:</b> <a href="dpnp__iterator_8hpp_source.html#l00223">dpnp_iterator.hpp:223</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
